@@ -4,9 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .card {
+            margin-top: 20px;
+            border: 1px solid #ccc; 
+            padding: 15px;
+            width: 320px;
+        
+        }
+        img {
+            max-width: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        </style>
 </head>
 <body>
-    <h1>Test event</h1>
-    <img src="./assets/poster.png" />
+    <h1>Test event1</h1>
+    <h2>put your picture our you could just vote</h2>
+    <input type="file" accept="image/*" >
+
+    <div class="card">
+        <img id="preview" alt="here will be picture">
+        <button id="voteBtn">:P vote</button>
+        <p>VOTE: <span id="votes">0</span></p>
+        </div>
+    <script>
+        const fileInput = document.getElementsById('fileInput');
+        const preview = document.getElementById('preview');
+        const voteBtn = document.getElementById('voteBtn');
+        const votesEl = document.getElementById('votes');
+
+        let votes = localStorage.getItem('votes') || 0;
+        votesEl.textContent = votes;
+    
+
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+
+
+    
+    voteBtn.addEventListener('click', () => {
+        votes++;
+        votesEl.textContent = votes;
+        localStorage.setItem('votes',votes);
+    });
+    </Script>
 </body>
 </html>
